@@ -1,0 +1,219 @@
+/* ---------------- Reset & Base ---------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9f9fb;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* ---------------- Login Page ---------------- */
+.login-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.login-container input:disabled {
+  background-color: #f0f0f0;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.button-group button {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button-group button:hover {
+  opacity: 0.9;
+}
+
+.button-group button:first-child {
+  background-color: #4a90e2;
+  color: #fff;
+}
+
+.button-group button:last-child {
+  background-color: #50c878;
+  color: #fff;
+}
+
+.message {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.message.success {
+  color: #2e7d32;
+}
+
+.message.error {
+  color: #c62828;
+}
+
+/* ---------------- Dashboard ---------------- */
+.p-4 {
+  padding: 1rem;
+}
+
+.max-w-2xl {
+  max-width: 768px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+h1.text-xl {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Tabs */
+button.px-3 {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button.bg-blue-500 {
+  background-color: #4a90e2;
+  color: #fff;
+}
+
+button.bg-gray-200 {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button.bg-red-500 {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+button.bg-green-500 {
+  background-color: #50c878;
+  color: #fff;
+}
+
+/* Inputs */
+input.border {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+}
+
+/* List items */
+ul {
+  list-style: none;
+}
+
+ul li {
+  background-color: #fff;
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+ul li small {
+  color: #666;
+}
+
+/* Buttons inside list items */
+ul li button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+ul li button:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .login-container, .max-w-2xl {
+    width: 90%;
+  }
+
+  .flex-wrap input {
+    flex-basis: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}
