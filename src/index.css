@@ -319,3 +319,18 @@ ul li button:hover {
     margin-top: 0;
   }
 }
+
+/* Laptop Layout */
+@media (min-width: 1200px) {
+  .login-container {
+    max-width: 700px;
+    width: 90%; 
+    margin: 100px auto;
+    padding: 3rem;
+  }
+  .max-w-2xl {
+    max-width: 960px;
+    width: 90%; 
+  }
+  
+}
