@@ -6,6 +6,160 @@
   --cinereous: #aa998fff;
 }
 
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--linen);
+  color: var(--rose-taupe);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* AuthForm Container */
+.auth-form-container {
+  max-width: 600px;
+  margin: 80px auto;
+  background-color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-form-container h1 {
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+  color: var(--rose-taupe);
+}
+
+/* Inputs */
+.auth-form-container input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid var(--dun);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form-container input:focus {
+  border-color: var(--old-rose);
+  outline: none;
+}
+
+.auth-form-container input:disabled {
+  background-color: var(--linen);
+  cursor: not-allowed;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.button-group button {
+  flex: 1;
+  padding: 0.85rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.button-group button:first-child {
+  background-color: var(--old-rose);
+  color: #fff;
+}
+
+.button-group button:last-child {
+  background-color: var(--rose-taupe);
+  color: #fff;
+}
+
+.button-group button:disabled {
+  background-color: var(--dun);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.button-group button:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Toggle Mode Button */
+.toggle-mode {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--old-rose);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.toggle-mode:hover {
+  color: var(--rose-taupe);
+}
+
+/* Messages */
+.message {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  text-align: center;
+  user-select: none;
+}
+
+.message.success {
+  color: #2e7d32;
+}
+
+.message.error {
+  color: #c62828;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .auth-form-container {
+    width: 90%;
+    padding: 2rem 1.5rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}
+
+
+:root {
+  --old-rose: #cc8b86ff;
+  --linen: #f9eae1ff;
+  --rose-taupe: #7d4f50ff;
+  --dun: #d1be9cff;
+  --cinereous: #aa998fff;
+}
+
 /* ---------------- Reset & Base ---------------- */
 * {
   margin: 0;
@@ -23,11 +177,11 @@ body {
 
 /* ---------------- Login Page ---------------- */
 .login-container {
-  max-width: 400px;
+  max-width: 1000px;
   margin: 80px auto;
   background-color: #ffffff;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -323,14 +477,13 @@ ul li button:hover {
 /* Laptop Layout */
 @media (min-width: 1200px) {
   .login-container {
-    max-width: 700px;
+    max-width: 700px; 
     width: 90%; 
     margin: 100px auto;
     padding: 3rem;
   }
   .max-w-2xl {
     max-width: 960px;
-    width: 90%; 
+    width: 90%; /* added for extra space */
   }
-  
 }
