@@ -5,23 +5,26 @@ import Dashboard from "./Dashboard";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch current session (async for Supabase v2.x)
     supabase.auth.getSession().then(({ data }) => {
       setUser(data?.session?.user ?? null);
+      setLoading(false);
     });
 
-    // Listen for auth state changes
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
 
-    // Cleanup
     return () => {
       subscription?.subscription?.unsubscribe?.();
     };
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Or a spinner for better UX
+  }
 
   if (!user) return <Login />;
   return <Dashboard user={user} />;
