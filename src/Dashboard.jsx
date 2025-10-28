@@ -7,43 +7,80 @@ export default function Dashboard({ user }) {
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [status, setStatus] = useState("");
-  const [artist, setArtist] = useState(""); // for albums only
+  const [artist, setArtist] = useState(""); // albums only
+  const [flash, setFlash] = useState("");
 
+  // Fetch user-specific items for current tab
   const fetchItems = async () => {
+    setFlash(""); // clear previous message
+    setItems([]); // clear old items to avoid flicker
     const { data, error } = await supabase
       .from(tab)
       .select("*")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
-    if (!error) setItems(data);
+    if (error) {
+      setFlash("Failed to fetch items: " + error.message);
+      setItems([]);
+    } else {
+      setItems(data);
+    }
+  };
+
+  // Reset form and flash on tab change and fetch new items
+  const handleTabChange = (newTab) => {
+    if (tab !== newTab) {
+      setTab(newTab);
+      setTitle("");
+      setNotes("");
+      setStatus("");
+      setArtist("");
+      setFlash("");
+    }
   };
 
   useEffect(() => {
     fetchItems();
-  }, [tab]);
+  }, [tab, user]);
 
   const addItem = async () => {
-    if (!title) return;
-
+    if (!title) {
+      setFlash("Title is required!");
+      return;
+    }
     let insertData = { user_id: user.id, title, notes, status };
     if (tab === "albums")
       insertData = { user_id: user.id, album_name: title, artist, notes, status };
-
-    await supabase.from(tab).insert([insertData]);
-    setTitle("");
-    setNotes("");
-    setStatus("");
-    setArtist("");
-    fetchItems();
+    const { error } = await supabase.from(tab).insert([insertData]);
+    if (error) {
+      setFlash("Failed to add: " + error.message);
+    } else {
+      setFlash("Added!");
+      setTitle("");
+      setNotes("");
+      setStatus("");
+      setArtist("");
+      fetchItems();
+    }
   };
 
   const deleteItem = async (id) => {
-    await supabase.from(tab).delete().eq("id", id);
-    fetchItems();
+    const { error } = await supabase.from(tab).delete().eq("id", id);
+    if (error) {
+      setFlash("Failed to delete: " + error.message);
+    } else {
+      setFlash("Deleted!");
+      fetchItems();
+    }
   };
 
   const logout = async () => {
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      setFlash("Logout failed: " + error.message);
+    } else {
+      setFlash("Logged out!");
+    }
   };
 
   return (
@@ -62,7 +99,7 @@ export default function Dashboard({ user }) {
         {["movies", "books", "albums"].map((t) => (
           <button
             key={t}
-            onClick={() => setTab(t)}
+            onClick={() => handleTabChange(t)}
             className={`px-3 py-1 rounded ${
               tab === t ? "bg-blue-500 text-white" : "bg-gray-200"
             }`}
@@ -71,6 +108,10 @@ export default function Dashboard({ user }) {
           </button>
         ))}
       </div>
+
+      {flash && (
+        <div style={{ marginBottom: 10, color: "crimson" }}>{flash}</div>
+      )}
 
       <div className="mb-4 flex gap-2 flex-wrap">
         <input
@@ -87,7 +128,6 @@ export default function Dashboard({ user }) {
             className="border p-1 rounded flex-grow min-w-[150px]"
           />
         )}
-
         <input
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
